@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+/* Light Soft Off-White Ambient Backdrops */
+.bg-ambient-light {
+  background: radial-gradient(circle at top right, rgba(112, 72, 232, 0.05) 0%, #F8F9FA 60%);
+}
+
+.bg-hero-glow {
+  background: radial-gradient(circle at 50% 15%, rgba(112, 72, 232, 0.08) 0%, transparent 60%);
+}
+
+/* Vibrant Gradient Accents (Purple -> Coral -> Yellow) */
+.accent-gradient-text,
+.gold-gradient-text {
+  background: linear-gradient(135deg, #7048E8 0%, #FA5252 55%, #FAB005 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.purple-gradient-text {
+  background: linear-gradient(135deg, #7048E8 0%, #9775FA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.coral-gradient-text {
+  background: linear-gradient(135deg, #FA5252 0%, #FAB005 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1F3F5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CED4DA;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7048E8;
+}
