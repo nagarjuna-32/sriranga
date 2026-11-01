@@ -1,9 +1,23 @@
 # RANGA SRI ENTERPRISES – PROFESSIONAL BUSINESS PLATFORM
 
+<div align="center">
+
+![GitHub repo size](https://img.shields.io/github/repo-size/nagarjuna-32/sriranga?color=7048E8)
+![GitHub stars](https://img.shields.io/github/stars/nagarjuna-32/sriranga?style=social)
+![React](https://img.shields.io/badge/React-19.0-61DAFB?logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-6.0-646CFF?logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-3.4-38B2AC?logo=tailwindcss&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-24-339933?logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/Express.js-4.19-000000?logo=express&logoColor=white)
+![Sequelize](https://img.shields.io/badge/Sequelize-6.37-52B0E7?logo=sequelize&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql&logoColor=white)
+
 > **"Your Trusted Partner for Business & Digital Solutions"**  
 > *"Making Business Simpler. Making Ideas Happen."*
 
-A modern, responsive, corporate multi-service enterprise web application engineered for **RANGA SRI ENTERPRISES**. Built with **React (Vite) + Tailwind CSS + Lucide Icons** on the frontend, a robust **Node.js / Express.js REST API** on the backend, and **MySQL (Sequelize ORM)** for relational data persistence.
+</div>
+
+A modern, responsive, corporate multi-service enterprise web application and management platform engineered for **RANGA SRI ENTERPRISES**. Built with **React + Vite + Tailwind CSS** on the client, an **Express.js REST API with JWT Authentication** on the server, and **MySQL (Sequelize ORM)** for relational persistence.
 
 ---
 
@@ -11,59 +25,65 @@ A modern, responsive, corporate multi-service enterprise web application enginee
 
 Ranga Sri Enterprises provides integrated professional services across six core pillars:
 
-1. **Government & Documentation**: Documentation assistance, application support, procedural guidance, document preparation, and administrative coordination. *(Provided under independent facilitation notice).*
-2. **Business & Registration**: Company setup guidance, MSME/partnership documentation, entity structuring, registration support, and business consulting.
-3. **IT & Digital Solutions**: Modern responsive web development, enterprise UI/UX design, bespoke software systems, digital transformation, cloud adoption, and IT support.
-4. **Property & Real Estate**: Property documentation coordination, listing visibility, prospect enquiry coordination, and asset support.
-5. **Marketing & Advertising**: Full-funnel digital marketing, social media management, brand visual identity, multi-channel ad campaigns, and creative collateral.
-6. **Event Management**: Turnkey corporate conferences, grand birthday celebrations, weddings, stage design, AV coordination, and on-ground hospitality.
-
----
-
-## ⚡ Technology Stack
-
-### Frontend
-- **Framework**: React 18 / 19 with Vite
-- **Styling**: Tailwind CSS (custom corporate navy, royal blue, and subtle gold palette)
-- **Routing**: React Router DOM (v7)
-- **Icons**: Lucide React
-- **Animations & Interactivity**: Framer Motion & CSS micro-interactions
-- **HTTP Client**: Axios with automatic JWT interceptors
-
-### Backend
-- **Runtime**: Node.js (v24+)
-- **Web Framework**: Express.js
-- **Architecture**: Modular Controller-Service-Model REST API
-- **Security**: Helmet, CORS, Express-Rate-Limit, Bcrypt.js, JsonWebToken (JWT)
-- **File Uploads**: Multer with strict image MIME-type & 5MB file-size filters
-
-### Database & ORM
-- **Database**: MySQL 5.7+ / 8.0+ / MariaDB
-- **ORM**: Sequelize ORM (model associations, indexes, auto-sync, seeders)
-- **Zero-Friction Dev Fallback**: Automatic SQLite fallback if local MySQL daemon is not running on localhost:3306, enabling zero-config out-of-the-box local developer testing!
+1. **Government & Documentation**: Procedural assistance, statutory application support, administrative document guidance, file assembly, and compliance coordination *(operated under independent consultancy notice)*.
+2. **Business & Registration**: Company incorporation guidance, MSME/partnership setup, trade licenses, corporate documentation, and advisory.
+3. **IT & Digital Solutions**: Bespoke website development, enterprise web application design, digital transformation, cloud deployment, and managed IT services.
+4. **Property & Real Estate**: Real estate documentation coordination, asset promotion, prospect inquiry facilitation, and property verification support.
+5. **Marketing & Advertising**: Multi-channel digital marketing, social media branding, advertising campaigns, creative collateral, and business visibility.
+6. **Event Management**: Turnkey corporate conferences, grand birthday celebrations, weddings, stage coordination, audio-visual setups, and hospitality management.
 
 ---
 
 ## 🎨 Design System & Palette
 
-- **Dominant**: **Deep Charcoal & Rich Plum** (`#0C0A10`, `#14111A`, `#1F1A2A`, `#2F2840`, `#64245C`, `#7D2C73`) — Provides prestigious corporate gravitas and high visual contrast.
-- **Secondary**: **Crisp White & Champagne** (`#FFFFFF`, `#FCFAF7`, `#F7F2EA`, `#EFE5D4`) — Offers clean warmth, breathing space, and premium card elevations.
-- **Accent**: **Muted Gold & Rose** (`#C59B48`, `#D7AB50`, `#E4C379`, `#C47D7D`, `#D18F8F`) — Adds refined sophistication, subtle warmth, and distinct interactive focal points.
-- **Typography**: Geometric corporate headings with `Outfit` paired with modern `Plus Jakarta Sans` for body legibility.
+Engineered with a high-contrast corporate aesthetic:
+
+- **Dominant**: **Soft Off-White & Light Gray** (`#F8F9FA`, `#F1F3F5`, `#FFFFFF`) — Clean, open, and modern canvas that prevents visual fatigue.
+- **Secondary**: **Charcoal Typography** (`#121417`, `#1A1D20`, `#343A40`) — Deep high-contrast text and structural elements ensuring accessibility and readability.
+- **Accents**:
+  - **Vibrant Purple** (`#7048E8` / `#5F3DC4`): Primary action buttons, badges, glowing active indicators.
+  - **Vibrant Coral** (`#FA5252`): Attention counters, deadline assurance tags, and secondary action alerts.
+  - **Vibrant Yellow** (`#FAB005`): Star reviews, subtle icons, and micro-interaction accents.
+- **Typography**: Geometric headings (`Outfit`) paired with legible modern body typeface (`Plus Jakarta Sans`).
+
+---
+
+## ⚡ Technology Stack
+
+### Frontend Client
+- **Framework**: React (Vite)
+- **Styling**: Tailwind CSS with custom theme extensions
+- **Routing**: React Router DOM (v7)
+- **Icons**: Lucide React
+- **Animations**: Framer Motion & CSS micro-interactions
+- **State & Context**: `AuthContext` (JWT session), `SettingsContext` (site-wide live branding)
+- **HTTP Client**: Axios with Bearer token interceptors
+
+### Backend REST API
+- **Runtime**: Node.js (v18+)
+- **Framework**: Express.js
+- **Architecture**: Modular Controller-Service-Model REST API
+- **Security**: JWT authentication, Bcrypt password hashing, Helmet, CORS, Express-Rate-Limit
+- **Uploads**: Multer with MIME validation and size limits
+
+### Database & ORM
+- **Database**: MySQL 5.7+ / 8.0+ / MariaDB
+- **ORM**: Sequelize ORM (associations, indexes, validation)
+- **Zero-Friction Dev Fallback**: Built-in SQLite automatic development fallback enables immediate execution out of the box even without a local MySQL service running!
 
 ---
 
 ## 📁 Project Structure
 
-```
+```text
+chetu/
 ├── backend/
-│   ├── .env                       # Local environment variables
 │   ├── .env.example               # Template environment configuration
 │   ├── package.json
-│   ├── uploads/                   # Stored uploaded images & logos
+│   ├── uploads/                   # Stored user-uploaded media (.gitkeep)
 │   └── src/
 │       ├── config/
-│       │   └── database.js        # Sequelize connection & resilient fallback
+│       │   └── database.js        # Dual-mode Sequelize connection
 │       ├── controllers/
 │       │   ├── authController.js
 │       │   ├── dashboardController.js
@@ -74,8 +94,8 @@ Ranga Sri Enterprises provides integrated professional services across six core 
 │       │   ├── testimonialController.js
 │       │   └── uploadController.js
 │       ├── middleware/
-│       │   ├── auth.js            # JWT Bearer token authentication
-│       │   └── rateLimiter.js     # Brute-force & enquiry rate limiting
+│       │   ├── auth.js            # JWT Bearer verification
+│       │   └── rateLimiter.js     # Rate limiting middleware
 │       ├── models/
 │       │   ├── Admin.js
 │       │   ├── Enquiry.js
@@ -84,16 +104,16 @@ Ranga Sri Enterprises provides integrated professional services across six core 
 │       │   ├── Testimonial.js
 │       │   ├── WebsiteSetting.js
 │       │   └── index.js
-│       ├── routes/                # Centralized /api routes
+│       ├── routes/                # Mounts all /api routes
 │       ├── utils/
 │       │   └── jwt.js
-│       └── server.js              # Express app initialization & seeder
+│       └── server.js              # Express app & database seeder trigger
 │
 ├── frontend/
 │   ├── public/
 │   │   ├── logo.svg               # Corporate SVG emblem
-│   │   ├── robots.txt             # SEO Crawl directives
-│   │   └── sitemap.xml            # Search engine sitemap
+│   │   ├── robots.txt             # SEO crawl directives
+│   │   └── sitemap.xml            # Sitemap index
 │   ├── src/
 │   │   ├── components/
 │   │   │   ├── admin/             # AdminLayout, ProtectedRoute
@@ -102,8 +122,8 @@ Ranga Sri Enterprises provides integrated professional services across six core 
 │   │   │   ├── portfolio/         # PortfolioCard, PortfolioDetailModal
 │   │   │   └── services/          # ServiceCard
 │   │   ├── context/
-│   │   │   ├── AuthContext.jsx    # Admin auth state & token management
-│   │   │   └── SettingsContext.jsx# Live site-wide dynamic branding
+│   │   │   ├── AuthContext.jsx
+│   │   │   └── SettingsContext.jsx
 │   │   ├── pages/
 │   │   │   ├── admin/             # Dashboard, Services, Enquiries, Portfolio, Testimonials, Settings
 │   │   │   ├── About.jsx
@@ -115,43 +135,46 @@ Ranga Sri Enterprises provides integrated professional services across six core 
 │   │   │   ├── Services.jsx
 │   │   │   ├── Terms.jsx
 │   │   │   └── Testimonials.jsx
-│   │   ├── services/              # API caller services (Axios)
+│   │   ├── services/              # API clients (adminService, publicService)
 │   │   └── utils/
-│   │       └── whatsapp.js        # Formatted WhatsApp message generator
+│   │       └── whatsapp.js        # Dynamic WhatsApp URL generator
 │   ├── tailwind.config.js
 │   └── vite.config.js
 │
 ├── database/
-│   ├── schema.sql                 # Pure MySQL table definitions DDL
+│   ├── schema.sql                 # Pure MySQL DDL schema definitions
 │   └── seeds/
 │       ├── run-seeds.js           # CLI database seeder
-│       └── seedData.js            # 6 core services, case studies & settings
+│       └── seedData.js            # Seed data for services, settings, admin
 │
 ├── .env.example
+├── .gitignore
 ├── package.json
 └── README.md
 ```
 
 ---
 
-## 🚀 Quick Start Guide
+## 🚀 Getting Started
 
-### 1. Prerequisites
-- **Node.js**: v18.0.0 or higher (v24 recommended)
-- **MySQL Server** (Optional for local dev due to auto-fallback; required for production)
+### 1. Clone Repository
+```bash
+git clone https://github.com/nagarjuna-32/sriranga.git
+cd sriranga
+```
 
-### 2. Configure Backend Environment
-Create `backend/.env` (or copy from `backend/.env.example`):
+### 2. Configure Backend
+Copy `backend/.env.example` to `backend/.env`:
 ```env
 PORT=5000
 NODE_ENV=development
 
-# MySQL Credentials
+# MySQL Credentials (Optional for local dev, auto-falls back to SQLite)
 DB_DIALECT=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_USER=root
-DB_PASSWORD=your_password
+DB_PASSWORD=your_mysql_password
 DB_NAME=ranga_sri_enterprises
 
 # Security
@@ -164,107 +187,107 @@ FRONTEND_URL=http://localhost:5173
 
 ### 3. Install Dependencies
 ```bash
-# In backend/
+# Backend
 cd backend
 npm install
 
-# In frontend/
+# Frontend
 cd ../frontend
 npm install
 ```
 
 ### 4. Database Setup & Seeding
-If you have MySQL running:
+If you run a local MySQL server:
 ```bash
 mysql -u root -p < database/schema.sql
 cd backend && npm run seed
 ```
-*Note: If MySQL is not running on localhost, the backend automatically utilizes SQLite fallback and auto-bootstraps all 6 services, initial settings, admin user, and sample case studies on first launch!*
+*(If MySQL is not installed locally, starting the server will automatically bootstrap a local SQLite database with all 6 services, initial settings, admin user, and sample case studies!)*
 
-### 5. Run the Application
-In terminal 1 (Backend API):
+### 5. Run Development Servers
+Open two terminal windows:
+
+**Terminal 1 (Backend REST API):**
 ```bash
 cd backend
 npm start
-# Server runs on: http://localhost:5000
+# API runs on: http://localhost:5000
 ```
 
-In terminal 2 (Frontend Dev Server):
+**Terminal 2 (Frontend Client):**
 ```bash
 cd frontend
 npm run dev
-# Frontend runs on: http://localhost:5173
+# Web app runs on: http://localhost:5173
 ```
 
 ---
 
-## 🔐 Admin Dashboard
+## 🔐 Administrative Dashboard
 
-Access the secure administrative portal at:
-**URL**: `http://localhost:5173/admin`  
-(Redirects to `http://localhost:5173/admin/login` if not authenticated)
+- **Portal URL**: [http://localhost:5173/admin](http://localhost:5173/admin)
+- **Login URL**: [http://localhost:5173/admin/login](http://localhost:5173/admin/login)
 
-### Default Admin Credentials:
+### Default Admin Credentials
 - **Username / Email**: `admin` or `admin@rangasrienterprises.com`
 - **Password**: `Admin@RangaSri2026!`
 
 ### Admin Capabilities:
-1. **Dashboard Overview**: Real-time counter of total enquiries, pending enquiries, active services, portfolio count, and recent inquiry activity.
+1. **Overview Analytics**: Real-time counter of total enquiries, pending enquiries, active services, portfolio items, and recent inquiry activity.
 2. **Service Management**: Add, update, reorder, upload images, or deactivate any of the 6 core business pillars.
-3. **Enquiry Management**: Review customer submissions, search/filter, update status (`pending` → `contacted` → `completed`), add administrative notes, delete entries, and click **WhatsApp** for instant 1-click messaging!
+3. **Enquiry Management**: Review customer submissions, search/filter, update status (`pending` → `contacted` → `completed`), add internal notes, delete entries, and click **WhatsApp** for instant 1-click messaging.
 4. **Portfolio Management**: Add client case studies, categorize by industry, mark as featured, upload screenshots.
 5. **Testimonial Moderation**: Review user-submitted reviews with star ratings and approve or reject before public display.
-6. **Website Settings**: Change phone numbers, WhatsApp numbers, email, physical address, business hours, social profile links, real business statistics, and statutory disclaimer in real-time without touching code.
+6. **Website Settings**: Update contact phone numbers, WhatsApp numbers, email, physical address, business hours, social links, statistics, and statutory disclaimer in real-time.
 
 ---
 
 ## 📱 WhatsApp Integration
 
 - A floating WhatsApp button is present on all public pages.
-- When a customer fills out any consultation form:
+- When a customer submits an enquiry:
   1. The form validates all required fields.
-  2. The enquiry is immediately saved to the database.
-  3. WhatsApp opens automatically in a new window with a pre-formatted message:
+  2. The enquiry is saved to the database.
+  3. WhatsApp opens automatically with a pre-formatted message:
      ```text
      *NEW ENQUIRY - RANGA SRI ENTERPRISES*
      ----------------------------------------
-     👤 *Name:* [Customer Name]
-     📞 *Phone:* [Customer Phone]
-     ✉️ *Email:* [Customer Email]
-     🏷️ *Service:* [Selected Service Pillar]
+     👤 *Name:* Anand Sharma
+     📞 *Phone:* +91 98450 12345
+     ✉️ *Email:* anand@company.com
+     🏷️ *Service:* IT & Digital Solutions
      ----------------------------------------
      📝 *Enquiry Details:*
-     [Customer Message]
+     We are looking to develop a custom web portal for our enterprise.
      ----------------------------------------
      Sent via official website enquiry portal
      ```
-- The target WhatsApp recipient number is 100% configurable in the Admin Settings and `.env`.
+- The recipient phone number is fully configurable in the Admin Settings and `.env`.
 
 ---
 
-## ⚖️ Statutory Notice & Independent Standing
+## ⚖️ Statutory Transparency Notice
 
-All public pages, service detail views, and footers contain the required non-government affiliation notice:
+All public pages, service detail views, and footers display the explicit independent standing notice:
 > *"Disclaimer: Ranga Sri Enterprises is an independent consultancy and service facilitation provider. We do not claim official government affiliation, authority or licensing unless explicitly specified. All government-related and administrative services are provided on a procedural assistance and facilitation basis."*
 
 ---
 
-## 🛡️ Production Deployment
+## 🛡️ Production Build
 
-1. **Frontend Production Build**:
-   ```bash
-   cd frontend
-   npm run build
-   ```
-   Outputs optimized, gzip-ready static assets into `frontend/dist/`.
+```bash
+# Build frontend
+cd frontend
+npm run build
 
-2. **Backend Production Run**:
-   ```bash
-   cd backend
-   NODE_ENV=production npm start
-   ```
-   Can be hosted behind an Nginx reverse proxy or containerized with PM2/Docker.
+# Run backend in production
+cd ../backend
+NODE_ENV=production npm start
+```
 
 ---
 
-© 2026 **RANGA SRI ENTERPRISES**. All rights reserved.
+## 📄 License & Copyright
+
+© 2026 **RANGA SRI ENTERPRISES**. All rights reserved.  
+Developed by [nagarjuna-32](https://github.com/nagarjuna-32).
