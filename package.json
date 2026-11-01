@@ -1,0 +1,22 @@
+{
+  "name": "ranga-sri-enterprises",
+  "version": "1.0.0",
+  "description": "Professional Business & Digital Solutions Platform for Ranga Sri Enterprises",
+  "scripts": {
+    "start:backend": "cd backend && npm start",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build:frontend": "cd frontend && npm run build",
+    "seed": "cd backend && npm run seed"
+  },
+  "keywords": [
+    "ranga-sri-enterprises",
+    "business-portal",
+    "react",
+    "express",
+    "mysql",
+    "sequelize"
+  ],
+  "author": "Ranga Sri Enterprises",
+  "license": "ISC"
+}
