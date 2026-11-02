@@ -69,10 +69,12 @@ const Footer = () => {
           {/* Column 1: Company Profile (4 cols) */}
           <div className="lg:col-span-4 space-y-5">
             <Link to="/" className="flex items-center space-x-3 group">
-              <div className="w-10 h-10 rounded-xl bg-purple-50 border-2 border-purple-200 p-0.5 shadow-sm flex items-center justify-center">
-                <span className="font-heading font-extrabold text-base text-purple-600">
-                  RS<span className="text-coral-500">E</span>
-                </span>
+              <div className="w-12 h-12 rounded-xl overflow-hidden shadow-sm border border-gray-300 p-0.5 bg-black flex items-center justify-center flex-shrink-0 group-hover:border-purple-400 transition-all">
+                <img
+                  src={settings.logo_url || "/logo.jpg"}
+                  alt={settings.company_name || "RANGA SRI ENTERPRISES"}
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div>
                 <span className="font-heading font-extrabold text-lg text-charcoal-900 tracking-tight">

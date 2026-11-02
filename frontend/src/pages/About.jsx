@@ -102,13 +102,22 @@ const About = ({ onOpenEnquiry }) => {
                   alt="Ranga Sri Enterprises Team Strategy"
                   className="w-full h-96 object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950/80 via-transparent to-transparent flex items-end p-8">
-                  <div className="text-white space-y-1">
-                    <div className="font-heading font-bold text-xl text-yellow-300">
-                      Ranga Sri Enterprises
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950/85 via-charcoal-950/40 to-transparent flex items-end p-8">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-14 h-14 rounded-2xl overflow-hidden border-2 border-yellow-400/80 shadow-lg bg-black flex-shrink-0 flex items-center justify-center p-0.5">
+                      <img
+                        src={settings.logo_url || "/logo.jpg"}
+                        alt={settings.company_name}
+                        className="w-full h-full object-contain"
+                      />
                     </div>
-                    <div className="text-xs text-purple-100">
-                      Bengaluru, Karnataka • Multi-Service Enterprise
+                    <div className="text-white space-y-1">
+                      <div className="font-heading font-bold text-xl text-yellow-300">
+                        {settings.company_name}
+                      </div>
+                      <div className="text-xs text-purple-100">
+                        Bengaluru, Karnataka • Multi-Service Enterprise
+                      </div>
                     </div>
                   </div>
                 </div>

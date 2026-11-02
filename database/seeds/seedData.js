@@ -3,6 +3,7 @@ const bcrypt = require(path.join(__dirname, '../../backend/node_modules/bcryptjs
 
 const initialSettings = [
   { setting_key: 'company_name', setting_value: 'RANGA SRI ENTERPRISES', setting_group: 'general', description: 'Official company name' },
+  { setting_key: 'logo_url', setting_value: '/logo.jpg', setting_group: 'general', description: 'Official enterprise brand logo image URL' },
   { setting_key: 'tagline', setting_value: 'Your Trusted Partner for Business & Digital Solutions', setting_group: 'general', description: 'Company primary tagline' },
   { setting_key: 'main_headline', setting_value: 'Making Business Simpler. Making Ideas Happen.', setting_group: 'general', description: 'Hero section main headline' },
   { setting_key: 'company_description', setting_value: 'Ranga Sri Enterprises provides integrated professional services across government documentation, business registration, IT and digital solutions, property and real estate, marketing and advertising, and event management.', setting_group: 'general', description: 'Official company description' },

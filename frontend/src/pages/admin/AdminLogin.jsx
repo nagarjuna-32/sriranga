@@ -45,12 +45,14 @@ const AdminLogin = () => {
 
       <div className="relative w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
         
-        {/* Top Header - Clean White with Vibrant Purple Emblem */}
+        {/* Top Header - Clean White with Official Logo */}
         <div className="bg-white text-charcoal-900 p-8 text-center relative border-b border-gray-100">
-          <div className="w-14 h-14 rounded-2xl bg-purple-50 border-2 border-purple-200 shadow-sm mx-auto mb-3 flex items-center justify-center">
-            <span className="text-purple-600 font-heading font-extrabold text-xl">
-              RS<span className="text-coral-500">E</span>
-            </span>
+          <div className="w-20 h-20 rounded-2xl overflow-hidden shadow-md mx-auto mb-3 border-2 border-purple-200 bg-black flex items-center justify-center p-1">
+            <img
+              src="/logo.jpg"
+              alt="RANGA SRI ENTERPRISES"
+              className="w-full h-full object-contain"
+            />
           </div>
           <h2 className="font-heading font-extrabold text-2xl text-charcoal-900">
             Administrative Portal

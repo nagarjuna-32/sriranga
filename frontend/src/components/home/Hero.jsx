@@ -93,13 +93,22 @@ const Hero = ({ onOpenEnquiry }) => {
                 
                 {/* Header */}
                 <div className="flex items-center justify-between border-b border-gray-100 pb-4">
-                  <div>
-                    <span className="text-[11px] uppercase tracking-wider text-purple-600 font-bold block">
-                      Multi-Service Enterprise
-                    </span>
-                    <h3 className="text-lg font-bold text-charcoal-900 font-heading">
-                      Integrated Service Model
-                    </h3>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-12 h-12 rounded-xl overflow-hidden shadow-sm border border-gray-200 bg-black flex items-center justify-center p-0.5 flex-shrink-0">
+                      <img
+                        src={settings.logo_url || "/logo.jpg"}
+                        alt={settings.company_name || "RANGA SRI ENTERPRISES"}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <div>
+                      <span className="text-[11px] uppercase tracking-wider text-purple-600 font-bold block">
+                        Multi-Service Enterprise
+                      </span>
+                      <h3 className="text-lg font-bold text-charcoal-900 font-heading">
+                        Integrated Service Model
+                      </h3>
+                    </div>
                   </div>
                   <div className="w-10 h-10 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center text-purple-600">
                     <Zap className="w-5 h-5 text-coral-500" />

@@ -6,6 +6,7 @@ const SettingsContext = createContext(null);
 export const SettingsProvider = ({ children }) => {
   const [settings, setSettings] = useState({
     company_name: 'RANGA SRI ENTERPRISES',
+    logo_url: '/logo.jpg',
     tagline: 'Your Trusted Partner for Business & Digital Solutions',
     main_headline: 'Making Business Simpler. Making Ideas Happen.',
     company_description: 'Ranga Sri Enterprises provides integrated professional services across government documentation, business registration, IT and digital solutions, property and real estate, marketing and advertising, and event management.',

@@ -116,10 +116,12 @@ const Navbar = ({ onOpenEnquiry }) => {
           <div className="flex items-center justify-between h-20">
             {/* Brand Logo */}
             <Link to="/" className="flex items-center space-x-3 group">
-              <div className="w-11 h-11 rounded-xl bg-purple-50 border-2 border-purple-200 flex items-center justify-center shadow-sm group-hover:border-purple-500 transition-colors">
-                <span className="font-heading font-extrabold text-lg text-purple-600 tracking-wider">
-                  RS<span className="text-coral-500">E</span>
-                </span>
+              <div className="w-12 h-12 rounded-xl overflow-hidden shadow-sm border border-gray-200 group-hover:border-purple-500 transition-all flex-shrink-0 bg-black flex items-center justify-center p-0.5">
+                <img
+                  src={settings.logo_url || "/logo.jpg"}
+                  alt={settings.company_name || "RANGA SRI ENTERPRISES"}
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div className="flex flex-col">
                 <span className="font-heading font-extrabold text-lg md:text-xl tracking-tight text-charcoal-900 group-hover:text-purple-600 transition-colors">

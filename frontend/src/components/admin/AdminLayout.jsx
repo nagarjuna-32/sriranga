@@ -42,15 +42,19 @@ const AdminLayout = () => {
         {/* Brand */}
         <div className="h-20 px-6 flex items-center justify-between border-b border-gray-200 bg-white">
           <Link to="/admin" className="flex items-center space-x-3">
-            <div className="w-9 h-9 rounded-xl bg-purple-600 text-white flex items-center justify-center font-bold font-heading text-sm shadow-sm">
-              RSE
+            <div className="w-10 h-10 rounded-xl overflow-hidden shadow-sm border border-gray-200 bg-black flex items-center justify-center p-0.5 flex-shrink-0">
+              <img
+                src={settings.logo_url || "/logo.jpg"}
+                alt="RSE Logo"
+                className="w-full h-full object-contain"
+              />
             </div>
             <div>
               <span className="font-heading font-extrabold text-charcoal-900 text-sm block leading-tight">
                 Admin Console
               </span>
-              <span className="text-[10px] text-purple-600 font-bold">
-                Ranga Sri Enterprises
+              <span className="text-[10px] text-purple-600 font-bold truncate block max-w-[130px]">
+                {settings.company_name || 'Ranga Sri'}
               </span>
             </div>
           </Link>
