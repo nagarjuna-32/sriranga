@@ -9,9 +9,11 @@ const testimonialRoutes = require('./testimonialRoutes');
 const settingsRoutes = require('./settingsRoutes');
 const dashboardRoutes = require('./dashboardRoutes');
 const uploadRoutes = require('./uploadRoutes');
+const providerRoutes = require('./providerRoutes');
 
 router.use('/auth', authRoutes);
 router.use('/services', serviceRoutes);
+router.use('/providers', providerRoutes);
 router.use('/enquiries', enquiryRoutes);
 router.use('/portfolio', portfolioRoutes);
 router.use('/testimonials', testimonialRoutes);

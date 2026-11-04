@@ -33,6 +33,21 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING(150),
       allowNull: false,
     },
+    category: {
+      type: DataTypes.STRING(100),
+      allowNull: true,
+      defaultValue: 'General',
+    },
+    district: {
+      type: DataTypes.STRING(60),
+      allowNull: true,
+      defaultValue: 'Bengaluru Urban',
+    },
+    enquiry_type: {
+      type: DataTypes.STRING(40),
+      allowNull: true,
+      defaultValue: 'Enquiry',
+    },
     message: {
       type: DataTypes.TEXT,
       allowNull: false,

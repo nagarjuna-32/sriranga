@@ -21,6 +21,7 @@ import { createWhatsAppChatUrl } from '../../utils/whatsapp';
 const AdminDashboard = () => {
   const [stats, setStats] = useState(null);
   const [recentEnquiries, setRecentEnquiries] = useState([]);
+  const [recentProviders, setRecentProviders] = useState([]);
   const [loading, setLoading] = useState(true);
   const { settings } = useSettings();
 
@@ -29,7 +30,8 @@ const AdminDashboard = () => {
       const res = await adminService.getDashboardStats();
       if (res.success) {
         setStats(res.stats);
-        setRecentEnquiries(res.recentEnquiries);
+        setRecentEnquiries(res.recentEnquiries || []);
+        setRecentProviders(res.recentProviders || []);
       }
     } catch (err) {
       console.error('Error loading dashboard stats:', err);
@@ -54,34 +56,34 @@ const AdminDashboard = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="w-10 h-10 border-4 border-brand-royal border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-10 h-10 border-4 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
 
   const statCards = [
     {
-      label: 'Total Enquiries',
+      label: 'Customer Enquiries',
       value: stats?.totalEnquiries || 0,
-      sub: `${stats?.pendingEnquiries || 0} Pending Attention`,
+      sub: `${stats?.pendingEnquiries || 0} Pending attention`,
       icon: Mail,
-      color: 'bg-blue-500',
+      color: 'bg-purple-600',
       link: '/admin/enquiries',
     },
     {
-      label: 'New / Pending Enquiries',
-      value: stats?.pendingEnquiries || 0,
-      sub: 'Action required',
-      icon: Clock,
-      color: 'bg-amber-500',
-      link: '/admin/enquiries?status=pending',
+      label: 'Partner Providers',
+      value: stats?.totalProviders || 0,
+      sub: `${stats?.pendingProviders || 0} Pending verification`,
+      icon: Users,
+      color: 'bg-coral-500',
+      link: '/admin/providers',
     },
     {
-      label: 'Active Services',
-      value: `${stats?.activeServices || 0} / ${stats?.totalServices || 0}`,
-      sub: 'Multi-service offerings',
+      label: 'Services & Categories',
+      value: `${stats?.activeServices || 400}`,
+      sub: `${stats?.totalCategories || 20} Master Categories`,
       icon: Briefcase,
-      color: 'bg-emerald-500',
+      color: 'bg-yellow-500',
       link: '/admin/services',
     },
     {
@@ -93,11 +95,11 @@ const AdminDashboard = () => {
       link: '/admin/portfolio',
     },
     {
-      label: 'Pending Testimonials',
-      value: stats?.pendingTestimonials || 0,
-      sub: `${stats?.totalTestimonials || 0} Total reviews`,
+      label: 'Testimonials',
+      value: stats?.totalTestimonials || 0,
+      sub: `${stats?.pendingTestimonials || 0} Pending approval`,
       icon: MessageSquareQuote,
-      color: 'bg-purple-500',
+      color: 'bg-emerald-500',
       link: '/admin/testimonials',
     },
   ];
@@ -247,6 +249,100 @@ const AdminDashboard = () => {
                         rel="noopener noreferrer"
                         className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-[10px]"
                         title="Direct reply on WhatsApp"
+                      >
+                        <MessageCircle className="w-3 h-3" />
+                        <span>WhatsApp</span>
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+
+      {/* Recent Partner Registrations Table */}
+      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+        <div className="p-6 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-purple-50 text-purple-700 text-[10px] font-bold uppercase tracking-wider mb-1">
+              <span>Partner Onboarding</span>
+            </div>
+            <h3 className="font-heading font-bold text-lg text-charcoal-950">
+              Recent Partner Provider Applications
+            </h3>
+            <p className="text-xs text-charcoal-500">
+              Contractors, agencies, technicians and suppliers registered for verified network onboarding.
+            </p>
+          </div>
+          <Link
+            to="/admin/providers"
+            className="text-xs font-bold text-purple-600 hover:text-purple-800 inline-flex items-center space-x-1"
+          >
+            <span>View All Partner Providers</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+
+        {recentProviders.length === 0 ? (
+          <div className="p-8 text-center text-charcoal-500 text-xs">
+            No partner registrations submitted yet.
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr className="bg-gray-50 text-charcoal-500 uppercase tracking-wider text-[10px] border-b border-gray-200">
+                  <th className="py-3 px-6">Partner Name</th>
+                  <th className="py-3 px-6">Provider Type</th>
+                  <th className="py-3 px-6">Category</th>
+                  <th className="py-3 px-6">District</th>
+                  <th className="py-3 px-6">Status</th>
+                  <th className="py-3 px-6 text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {recentProviders.map((provider) => (
+                  <tr key={provider.id} className="hover:bg-gray-50/70 transition-colors">
+                    <td className="py-4 px-6">
+                      <div className="font-bold text-charcoal-900">{provider.full_name}</div>
+                      {provider.business_name && (
+                        <div className="text-[11px] text-purple-700 font-medium">{provider.business_name}</div>
+                      )}
+                      <div className="text-[10px] text-charcoal-500">{provider.phone}</div>
+                    </td>
+                    <td className="py-4 px-6">
+                      <span className="px-2 py-0.5 rounded-md bg-gray-100 text-charcoal-700 text-[10px] font-bold">
+                        {provider.provider_type || 'Provider'}
+                      </span>
+                    </td>
+                    <td className="py-4 px-6 text-charcoal-800 font-medium">
+                      {provider.primary_category}
+                    </td>
+                    <td className="py-4 px-6 text-charcoal-700">
+                      {provider.district}
+                    </td>
+                    <td className="py-4 px-6">
+                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                        provider.status === 'verified'
+                          ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                          : provider.status === 'rejected'
+                          ? 'bg-rose-50 text-rose-700 border border-rose-200'
+                          : 'bg-amber-50 text-amber-700 border border-amber-200'
+                      }`}>
+                        {provider.status}
+                      </span>
+                    </td>
+                    <td className="py-4 px-6 text-right">
+                      <a
+                        href={`https://wa.me/${provider.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
+                          `Hello ${provider.full_name}, thank you for registering with Ranga Sri Enterprises as a ${provider.provider_type || 'partner'}.`
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-[10px]"
+                        title="Chat on WhatsApp"
                       >
                         <MessageCircle className="w-3 h-3" />
                         <span>WhatsApp</span>

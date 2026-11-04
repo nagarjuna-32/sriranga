@@ -14,6 +14,7 @@ import {
 import { publicService } from '../services/publicService';
 import { useSettings } from '../context/SettingsContext';
 import { createWhatsAppEnquiryUrl, createWhatsAppChatUrl } from '../utils/whatsapp';
+import { ALL_SERVICES } from '../data/servicesCatalog';
 import CTASection from '../components/home/CTASection';
 
 const ServiceDetail = ({ onOpenEnquiry }) => {
@@ -42,11 +43,21 @@ const ServiceDetail = ({ onOpenEnquiry }) => {
         if (res.success && res.data) {
           setService(res.data);
         } else {
-          setError('Service not found');
+          const fallback = ALL_SERVICES.find(s => s.slug === slug || String(s.id) === String(slug));
+          if (fallback) {
+            setService(fallback);
+          } else {
+            setError('Service not found');
+          }
         }
       } catch (err) {
         console.error('Error fetching service details:', err);
-        setError('Could not load service information.');
+        const fallback = ALL_SERVICES.find(s => s.slug === slug || String(s.id) === String(slug));
+        if (fallback) {
+          setService(fallback);
+        } else {
+          setError('Could not load service information.');
+        }
       } finally {
         setLoading(false);
       }

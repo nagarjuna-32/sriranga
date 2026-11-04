@@ -12,25 +12,42 @@
 ![Sequelize](https://img.shields.io/badge/Sequelize-6.37-52B0E7?logo=sequelize&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql&logoColor=white)
 
-> **"Your Trusted Partner for Business & Digital Solutions"**  
-> *"Making Business Simpler. Making Ideas Happen."*
+> **"ONE-STOP SOLUTION FOR EVERY NEED"**  
+> *"EVERY SERVICE. ONE CONNECTION. Connecting You to Opportunities."*  
+> *"To provide a single platform where individuals, business owners, companies, contractors and industries can access almost every type of service under one roof across Karnataka and eventually throughout India."*
 
 </div>
 
-A modern, responsive, corporate multi-service enterprise web application and management platform engineered for **RANGA SRI ENTERPRISES**. Built with **React + Vite + Tailwind CSS** on the client, an **Express.js REST API with JWT Authentication** on the server, and **MySQL (Sequelize ORM)** for relational persistence.
+A full-scale, enterprise-grade multi-service web platform and partner ecosystem engineered for **RANGA SRI ENTERPRISES**. Built with **React + Vite + Tailwind CSS** on the client, an **Express.js REST API with JWT Authentication** on the server, and **MySQL (Sequelize ORM)** with SQLite automatic development fallback.
+
+Featuring **20 Main Service Categories** and **400 Specialized Services** with comprehensive coverage across all **31 Districts of Karnataka**.
 
 ---
 
-## 🏛️ Enterprise Service Pillars
+## 🏛️ Enterprise Scale: 20 Categories & 400 Services
 
-Ranga Sri Enterprises provides integrated professional services across six core pillars:
+Ranga Sri Enterprises connects individuals, companies, builders, and industries with verified service providers, contractors, suppliers, and agencies:
 
-1. **Government & Documentation**: Procedural assistance, statutory application support, administrative document guidance, file assembly, and compliance coordination *(operated under independent consultancy notice)*.
-2. **Business & Registration**: Company incorporation guidance, MSME/partnership setup, trade licenses, corporate documentation, and advisory.
-3. **IT & Digital Solutions**: Bespoke website development, enterprise web application design, digital transformation, cloud deployment, and managed IT services.
-4. **Property & Real Estate**: Real estate documentation coordination, asset promotion, prospect inquiry facilitation, and property verification support.
-5. **Marketing & Advertising**: Multi-channel digital marketing, social media branding, advertising campaigns, creative collateral, and business visibility.
-6. **Event Management**: Turnkey corporate conferences, grand birthday celebrations, weddings, stage coordination, audio-visual setups, and hospitality management.
+1. **Construction & Civil Works** (20 Services): Residential & commercial building, industrial construction, renovation, RCC, pre-engineered buildings, site development.
+2. **Architecture & Engineering** (20 Services): Architectural design, structural & MEP engineering, HVAC, fire safety, CAD drafting, building approval drawings.
+3. **Interior & Exterior Solutions** (20 Services): Full home & office interiors, modular kitchens, false ceilings, elevation design, waterproofing, facade branding.
+4. **Building Materials & Industrial Supply** (20 Services): Cement, TMT steel, sand, aggregates, ready-mix concrete, electrical/plumbing supplies, PPE, bulk procurement.
+5. **Labour, Contractors & Manpower** (20 Services): Masonry, carpentry, electrical, plumbing, steel fabrication, site supervisors, skilled project teams.
+6. **Machinery & Equipment Rental** (20 Services): JCB, excavator, crane, hydra, tippers, concrete pumps, scaffolding, generators, road rollers.
+7. **Property & Real Estate** (20 Services): Residential & commercial sales, plots, rental coordination, site visits, property documentation, tenant verification.
+8. **Business Setup & Consultancy** (20 Services): Business plans, project reports, company registration, startup incubation, trademark filing, franchise consulting.
+9. **Accounting, Taxation & Finance** (20 Services): GST returns, income tax filing, bookkeeping, auditing, payroll management, project finance, loan documentation.
+10. **Legal & Documentation Support** (20 Services): Agreement drafting, affidavit assistance, legal notices, sale deed coordination, compliance review.
+11. **IT, Software & Digital Solutions** (20 Services): Custom web applications, mobile apps, e-commerce platforms, cloud hosting, SEO, API integrations.
+12. **Marketing, Branding & Advertising** (20 Services): Brand identity, logo design, social media campaigns, Google/Meta ads, signage, corporate gifting.
+13. **Events, Catering & Hospitality** (20 Services): Corporate conferences, weddings, birthday galas, stage lighting, catering coordination, artist booking.
+14. **Automobile, Transport & Logistics** (20 Services): Goods transport, tempo/truck hire, fleet rentals, logistics coordination, commercial vehicle support.
+15. **Agriculture, Farm & Rural Services** (20 Services): Drip irrigation, tractor rental, solar pumps, farm fencing, polyhouse setup, organic inputs coordination.
+16. **Industrial Services & Fabrication** (20 Services): Steel shed fabrication, laser cutting, welding, industrial maintenance, electrical panels, warehouse storage.
+17. **Education, Training & Skill Development** (20 Services): Professional workshops, corporate training, computer courses, career counseling, certification training.
+18. **Health, Safety & Environmental Services** (20 Services): Fire safety audits, first aid kits, environmental impact assessment, pest control, industrial hygiene.
+19. **Security, Surveillance & Facility Management** (20 Services): Security personnel, CCTV installation, biometric access, housekeeping AMC, deep cleaning.
+20. **Daily Needs, Repairs & Utility Services** (20 Services): Electrician, plumber, AC service, carpentry repairs, water delivery, waste management.
 
 ---
 

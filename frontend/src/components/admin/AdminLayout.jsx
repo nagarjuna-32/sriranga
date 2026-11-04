@@ -28,8 +28,9 @@ const AdminLayout = () => {
 
   const navItems = [
     { name: 'Dashboard Overview', path: '/admin', icon: LayoutDashboard, exact: true },
-    { name: 'Service Management', path: '/admin/services', icon: Briefcase },
+    { name: 'Service Management (400)', path: '/admin/services', icon: Briefcase },
     { name: 'Customer Enquiries', path: '/admin/enquiries', icon: Mail },
+    { name: 'Partner Providers', path: '/admin/providers', icon: Users },
     { name: 'Portfolio Projects', path: '/admin/portfolio', icon: FolderKanban },
     { name: 'Client Testimonials', path: '/admin/testimonials', icon: MessageSquareQuote },
     { name: 'Website Settings', path: '/admin/settings', icon: Settings },

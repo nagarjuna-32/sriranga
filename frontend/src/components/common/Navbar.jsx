@@ -9,12 +9,18 @@ import {
   ArrowRight, 
   MessageCircle, 
   ChevronDown,
-  Sparkles
+  Sparkles,
+  MapPin,
+  Building,
+  UserCheck,
+  Grid,
+  Search
 } from 'lucide-react';
 import { useSettings } from '../../context/SettingsContext';
 import { createWhatsAppChatUrl } from '../../utils/whatsapp';
+import { RAW_CATEGORIES } from '../../data/servicesCatalog';
 
-const Navbar = ({ onOpenEnquiry }) => {
+const Navbar = ({ onOpenEnquiry, onOpenPartnerModal }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [servicesDropdown, setServicesDropdown] = useState(false);
@@ -36,22 +42,14 @@ const Navbar = ({ onOpenEnquiry }) => {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'About Us', path: '/about' },
     { 
-      name: 'Services', 
+      name: 'Services (400)', 
       path: '/services',
       hasDropdown: true,
-      subServices: [
-        { name: 'Government & Documentation', path: '/services/government-documentation' },
-        { name: 'Business & Registration', path: '/services/business-registration' },
-        { name: 'IT & Digital Solutions', path: '/services/it-digital-solutions' },
-        { name: 'Property & Real Estate', path: '/services/property-real-estate' },
-        { name: 'Marketing & Advertising', path: '/services/marketing-advertising' },
-        { name: 'Event Management', path: '/services/event-management' },
-      ]
     },
-    { name: 'Portfolio', path: '/portfolio' },
-    { name: 'Testimonials', path: '/testimonials' },
+    { name: '20 Categories', path: '/categories' },
+    { name: 'For Partners', path: '/partner-register', highlight: true },
+    { name: 'About Us', path: '/about' },
     { name: 'Contact', path: '/contact' },
   ];
 
@@ -68,6 +66,10 @@ const Navbar = ({ onOpenEnquiry }) => {
       <div className="bg-[#F1F3F5] text-charcoal-700 text-xs border-b border-gray-200 hidden md:block">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between">
           <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-1.5 text-purple-700 font-bold bg-purple-50 px-2 py-0.5 rounded border border-purple-200">
+              <MapPin className="w-3.5 h-3.5 text-coral-500" />
+              <span>Serving All 31 Districts Across Karnataka & India</span>
+            </div>
             <a 
               href={`tel:${settings.contact_phone}`} 
               className="flex items-center space-x-1.5 hover:text-purple-600 transition-colors font-medium"
@@ -82,13 +84,17 @@ const Navbar = ({ onOpenEnquiry }) => {
               <Mail className="w-3.5 h-3.5 text-purple-600" />
               <span>{settings.contact_email}</span>
             </a>
-            <div className="flex items-center space-x-1.5 text-charcoal-500">
-              <Clock className="w-3.5 h-3.5 text-charcoal-400" />
-              <span>{settings.working_hours}</span>
-            </div>
           </div>
 
           <div className="flex items-center space-x-4">
+            <Link
+              to="/partner-register"
+              className="flex items-center space-x-1 text-purple-700 hover:text-purple-900 font-semibold"
+            >
+              <UserCheck className="w-3.5 h-3.5 text-purple-600" />
+              <span>Become a Verified Provider</span>
+            </Link>
+            <span className="text-gray-300">|</span>
             <a
               href={whatsappUrl}
               target="_blank"
@@ -98,15 +104,11 @@ const Navbar = ({ onOpenEnquiry }) => {
               <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
               <span>WhatsApp Desk</span>
             </a>
-            <span className="text-gray-300">|</span>
-            <Link to="/admin/login" className="hover:text-purple-600 transition-colors text-charcoal-500 font-medium">
-              Staff Portal
-            </Link>
           </div>
         </div>
       </div>
 
-      {/* Main Navigation Bar - Crisp White with Charcoal Text & Vibrant Accents */}
+      {/* Main Navigation Bar */}
       <nav className={`w-full transition-all duration-300 ${
         scrolled 
           ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-gray-200' 
@@ -127,8 +129,8 @@ const Navbar = ({ onOpenEnquiry }) => {
                 <span className="font-heading font-extrabold text-lg md:text-xl tracking-tight text-charcoal-900 group-hover:text-purple-600 transition-colors">
                   {settings.company_name}
                 </span>
-                <span className="text-[10px] uppercase tracking-wider text-charcoal-500 font-semibold">
-                  Business & Digital Solutions
+                <span className="text-[10px] uppercase tracking-wider text-purple-600 font-bold">
+                  {settings.tagline || 'ONE-STOP SOLUTION FOR EVERY NEED'}
                 </span>
               </div>
             </Link>
@@ -152,33 +154,52 @@ const Navbar = ({ onOpenEnquiry }) => {
                             : 'text-charcoal-700 hover:text-purple-600 hover:bg-gray-50'
                         }`}
                       >
+                        <Grid className="w-3.5 h-3.5 text-purple-600" />
                         <span>{link.name}</span>
                         <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesDropdown ? 'rotate-180 text-purple-600' : 'text-charcoal-400'}`} />
                       </Link>
 
-                      {/* Dropdown Menu */}
+                      {/* Mega Dropdown Menu - 20 Categories */}
                       {servicesDropdown && (
-                        <div className="absolute top-full left-0 w-72 bg-white border border-gray-200 rounded-xl shadow-xl py-2 z-50 animate-fadeIn">
-                          <div className="px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-purple-600 border-b border-gray-100 flex items-center justify-between">
-                            <span>Enterprise Services</span>
-                            <span className="w-2 h-2 rounded-full bg-yellow-500"></span>
-                          </div>
-                          {link.subServices.map((sub) => (
-                            <Link
-                              key={sub.name}
-                              to={sub.path}
-                              className="block px-4 py-2.5 text-xs font-medium text-charcoal-700 hover:text-purple-600 hover:bg-purple-50/60 hover:border-l-2 hover:border-purple-600 transition-all"
-                            >
-                              {sub.name}
-                            </Link>
-                          ))}
-                          <div className="p-2 border-t border-gray-100 mt-1">
+                        <div className="absolute top-full -left-20 w-[720px] bg-white border border-gray-200 rounded-2xl shadow-2xl p-5 z-50 animate-fadeIn">
+                          <div className="flex items-center justify-between pb-3 mb-3 border-b border-gray-100">
+                            <div>
+                              <span className="text-xs font-extrabold uppercase tracking-wider text-purple-600 block">
+                                20 Main Categories • 400 Specialized Services
+                              </span>
+                              <p className="text-[11px] text-charcoal-500">
+                                Select a category to explore 20 verified services per vertical across Karnataka.
+                              </p>
+                            </div>
                             <Link
                               to="/services"
-                              className="block text-center text-xs text-purple-600 hover:text-purple-700 font-bold py-1"
+                              className="inline-flex items-center space-x-1 text-xs font-bold text-white bg-purple-600 hover:bg-purple-700 px-3 py-1.5 rounded-lg transition-all"
                             >
-                              View All 6 Solutions →
+                              <span>Explore All 400 Services</span>
+                              <ArrowRight className="w-3 h-3 text-yellow-300" />
                             </Link>
+                          </div>
+
+                          <div className="grid grid-cols-2 gap-2 max-h-[380px] overflow-y-auto pr-1">
+                            {RAW_CATEGORIES.map((cat) => (
+                              <Link
+                                key={cat.id}
+                                to={`/services?category=${encodeURIComponent(cat.name)}`}
+                                className="p-2.5 rounded-xl hover:bg-purple-50/70 border border-transparent hover:border-purple-200 flex items-start space-x-2.5 transition-all group/item"
+                              >
+                                <span className="w-6 h-6 rounded-lg bg-gray-100 group-hover/item:bg-purple-600 group-hover/item:text-white flex items-center justify-center text-[11px] font-bold text-charcoal-600 transition-colors flex-shrink-0 mt-0.5">
+                                  {cat.id}
+                                </span>
+                                <div className="flex-1 min-w-0">
+                                  <div className="text-xs font-bold text-charcoal-900 group-hover/item:text-purple-600 truncate">
+                                    {cat.name}
+                                  </div>
+                                  <div className="text-[10px] text-charcoal-500 truncate">
+                                    20 Services • Verified Providers
+                                  </div>
+                                </div>
+                              </Link>
+                            ))}
                           </div>
                         </div>
                       )}
@@ -190,26 +211,36 @@ const Navbar = ({ onOpenEnquiry }) => {
                   <Link
                     key={link.name}
                     to={link.path}
-                    className={`px-3.5 py-2 text-sm font-semibold rounded-lg transition-colors ${
-                      isActive(link.path)
-                        ? 'text-purple-600 bg-purple-50 font-bold'
-                        : 'text-charcoal-700 hover:text-purple-600 hover:bg-gray-50'
+                    className={`px-3 py-2 text-sm font-semibold rounded-lg transition-colors flex items-center space-x-1 ${
+                      link.highlight
+                        ? 'text-coral-600 hover:text-coral-700 bg-coral-50 hover:bg-coral-100/70 font-bold'
+                        : isActive(link.path)
+                          ? 'text-purple-600 bg-purple-50 font-bold'
+                          : 'text-charcoal-700 hover:text-purple-600 hover:bg-gray-50'
                     }`}
                   >
-                    {link.name}
+                    <span>{link.name}</span>
                   </Link>
                 );
               })}
             </div>
 
-            {/* Right Action Buttons - Vibrant Purple Accent */}
+            {/* Right Action Buttons */}
             <div className="hidden lg:flex items-center space-x-3">
+              <Link
+                to="/partner-register"
+                className="inline-flex items-center space-x-1.5 px-3.5 py-2.5 rounded-xl border border-gray-300 text-charcoal-800 hover:border-purple-400 hover:text-purple-600 text-xs font-bold transition-all"
+              >
+                <UserCheck className="w-3.5 h-3.5 text-purple-600" />
+                <span>Join as Partner</span>
+              </Link>
+
               <button
                 onClick={() => onOpenEnquiry && onOpenEnquiry()}
-                className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold shadow-md hover:shadow-purple-glow transition-all transform hover:-translate-y-0.5"
+                className="inline-flex items-center space-x-2 px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold shadow-md hover:shadow-purple-glow transition-all transform hover:-translate-y-0.5"
               >
-                <span>Request Consultation</span>
-                <ArrowRight className="w-4 h-4 text-yellow-300" />
+                <span>Get Quotation</span>
+                <ArrowRight className="w-3.5 h-3.5 text-yellow-300" />
               </button>
             </div>
 
@@ -219,7 +250,7 @@ const Navbar = ({ onOpenEnquiry }) => {
                 onClick={() => onOpenEnquiry && onOpenEnquiry()}
                 className="text-xs bg-purple-600 text-white px-3 py-1.5 rounded-lg font-bold"
               >
-                Enquire
+                Quote
               </button>
               <button
                 onClick={() => setIsOpen(!isOpen)}
@@ -234,36 +265,61 @@ const Navbar = ({ onOpenEnquiry }) => {
 
         {/* Mobile Dropdown Menu */}
         {isOpen && (
-          <div className="lg:hidden bg-white border-b border-gray-200 px-4 pt-2 pb-6 space-y-2">
+          <div className="lg:hidden bg-white border-b border-gray-200 px-4 pt-2 pb-6 space-y-2 max-h-[80vh] overflow-y-auto">
+            <div className="p-3 bg-purple-50 rounded-xl border border-purple-200 text-xs text-purple-900 font-semibold mb-2">
+              📍 Serving All 31 Districts Across Karnataka
+            </div>
+
             {navLinks.map((link) => (
               <div key={link.name}>
                 <Link
                   to={link.path}
-                  className={`block px-3 py-2 rounded-lg text-base font-semibold ${
+                  className={`block px-3 py-2 rounded-lg text-sm font-semibold ${
                     isActive(link.path)
-                      ? 'text-purple-600 bg-purple-50'
+                      ? 'text-purple-600 bg-purple-50 font-bold'
                       : 'text-charcoal-700 hover:bg-gray-50'
                   }`}
                 >
                   {link.name}
                 </Link>
                 {link.hasDropdown && (
-                  <div className="pl-6 space-y-1 mt-1 border-l-2 border-purple-100 ml-3">
-                    {link.subServices.map((sub) => (
+                  <div className="pl-4 space-y-1 mt-1 border-l-2 border-purple-100 ml-3">
+                    <Link
+                      to="/services"
+                      className="block py-1.5 text-xs text-purple-700 font-bold"
+                    >
+                      Browse All 400 Services Directory →
+                    </Link>
+                    <div className="grid grid-cols-1 gap-1 pt-1">
+                      {RAW_CATEGORIES.slice(0, 8).map((cat) => (
+                        <Link
+                          key={cat.id}
+                          to={`/services?category=${encodeURIComponent(cat.name)}`}
+                          className="block py-1 text-xs text-charcoal-600 hover:text-purple-600 truncate"
+                        >
+                          {cat.id}. {cat.name}
+                        </Link>
+                      ))}
                       <Link
-                        key={sub.name}
-                        to={sub.path}
-                        className="block py-1.5 text-xs text-charcoal-600 hover:text-purple-600"
+                        to="/categories"
+                        className="block py-1.5 text-xs text-coral-600 font-semibold"
                       >
-                        {sub.name}
+                        + View All 20 Categories
                       </Link>
-                    ))}
+                    </div>
                   </div>
                 )}
               </div>
             ))}
 
             <div className="pt-4 border-t border-gray-100 space-y-2">
+              <Link
+                to="/partner-register"
+                className="w-full flex items-center justify-center space-x-2 py-2.5 rounded-lg bg-charcoal-900 text-white text-xs font-bold"
+              >
+                <UserCheck className="w-4 h-4 text-purple-400" />
+                <span>Join as Verified Provider / Partner</span>
+              </Link>
               <a
                 href={whatsappUrl}
                 target="_blank"
@@ -277,7 +333,7 @@ const Navbar = ({ onOpenEnquiry }) => {
                 onClick={() => onOpenEnquiry && onOpenEnquiry()}
                 className="w-full flex items-center justify-center space-x-2 py-2.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold"
               >
-                <span>Request Consultation</span>
+                <span>Request Quotation</span>
                 <ArrowRight className="w-4 h-4 text-yellow-300" />
               </button>
             </div>

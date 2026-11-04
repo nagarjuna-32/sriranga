@@ -9,21 +9,14 @@ import {
   CheckCircle2, 
   AlertCircle,
   ShieldCheck,
-  Building2
+  Building2,
+  Layers,
+  MapPinCheck
 } from 'lucide-react';
 import { useSettings } from '../context/SettingsContext';
 import { publicService } from '../services/publicService';
 import { createWhatsAppEnquiryUrl, createWhatsAppChatUrl } from '../utils/whatsapp';
-
-const serviceOptions = [
-  'Government & Documentation',
-  'Business & Registration',
-  'IT & Digital Solutions',
-  'Property & Real Estate',
-  'Marketing & Advertising',
-  'Event Management',
-  'Other Corporate Inquiry'
-];
+import { RAW_CATEGORIES, KARNATAKA_DISTRICTS } from '../data/servicesCatalog';
 
 const Contact = () => {
   const { settings } = useSettings();
@@ -31,9 +24,14 @@ const Contact = () => {
     name: '',
     phone: '',
     email: '',
-    service_name: 'Business & Registration',
+    category: RAW_CATEGORIES[0]?.name || 'Construction & Civil Works',
+    service_name: RAW_CATEGORIES[0]?.services[0]?.title || 'Residential House Construction',
+    district: 'Bengaluru Urban',
+    enquiry_type: 'General Enquiry',
     message: '',
   });
+
+  const selectedCategoryObj = RAW_CATEGORIES.find(c => c.name === formData.category) || RAW_CATEGORIES[0];
 
   const [openWhatsAppDirectly, setOpenWhatsAppDirectly] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -42,7 +40,16 @@ const Contact = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (name === 'category') {
+      const newCatObj = RAW_CATEGORIES.find(c => c.name === value) || RAW_CATEGORIES[0];
+      setFormData(prev => ({
+        ...prev,
+        category: value,
+        service_name: newCatObj?.services[0]?.title || 'Consultation Request'
+      }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
     if (errorMsg) setErrorMsg('');
   };
 
@@ -71,7 +78,10 @@ const Contact = () => {
         name: formData.name.trim(),
         phone: formData.phone.trim(),
         email: formData.email.trim() || null,
+        category: formData.category,
         service_name: formData.service_name,
+        district: formData.district,
+        enquiry_type: formData.enquiry_type,
         message: formData.message.trim(),
       });
 
@@ -324,22 +334,56 @@ const Contact = () => {
                           value={formData.email}
                           onChange={handleChange}
                           placeholder="e.g. rajesh@enterprises.com"
-                          className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-royal outline-none"
+                          className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-purple-600 outline-none"
                         />
                       </div>
 
                       <div>
                         <label className="block text-xs font-semibold text-slate-700 mb-1.5">
-                          Select Service Required <span className="text-red-500">*</span>
+                          Karnataka District <span className="text-red-500">*</span>
+                        </label>
+                        <select
+                          name="district"
+                          value={formData.district}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-purple-600 outline-none bg-white font-medium"
+                        >
+                          {KARNATAKA_DISTRICTS.map((dst) => (
+                            <option key={dst} value={dst}>{dst}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                          Service Category <span className="text-red-500">*</span>
+                        </label>
+                        <select
+                          name="category"
+                          value={formData.category}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-purple-600 outline-none bg-white font-medium"
+                        >
+                          {RAW_CATEGORIES.map((cat) => (
+                            <option key={cat.id} value={cat.name}>{cat.name}</option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                          Specific Service <span className="text-red-500">*</span>
                         </label>
                         <select
                           name="service_name"
                           value={formData.service_name}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-royal outline-none bg-white"
+                          className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-purple-600 outline-none bg-white font-medium"
                         >
-                          {serviceOptions.map((opt) => (
-                            <option key={opt} value={opt}>{opt}</option>
+                          {selectedCategoryObj?.services?.map((srv) => (
+                            <option key={srv.id} value={srv.title}>{srv.title}</option>
                           ))}
                         </select>
                       </div>

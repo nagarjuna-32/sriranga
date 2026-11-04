@@ -7,12 +7,15 @@ import {
   X, 
   Upload, 
   Briefcase, 
-  AlertCircle,
-  CheckCircle2,
-  Eye,
-  EyeOff
+  AlertCircle, 
+  CheckCircle2, 
+  Eye, 
+  EyeOff,
+  Search,
+  Filter
 } from 'lucide-react';
 import { adminService } from '../../services/adminService';
+import { RAW_CATEGORIES } from '../../data/servicesCatalog';
 
 const iconOptions = [
   'FileText',
@@ -22,6 +25,22 @@ const iconOptions = [
   'TrendingUp',
   'Calendar',
   'Briefcase',
+  'Hammer',
+  'DraftingCompass',
+  'Paintbrush',
+  'Truck',
+  'HardHat',
+  'Wrench',
+  'Scale',
+  'CreditCard',
+  'Laptop',
+  'Wheat',
+  'ShieldCheck',
+  'HeartPulse',
+  'GraduationCap',
+  'Car',
+  'Sparkles',
+  'Utensils',
 ];
 
 const AdminServices = () => {
@@ -31,10 +50,12 @@ const AdminServices = () => {
   const [editingId, setEditingId] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [notification, setNotification] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('All');
 
   const [formData, setFormData] = useState({
     title: '',
-    category: 'Corporate Solutions',
+    category: 'Construction & Civil Works',
     short_description: '',
     full_description: '',
     icon: 'Briefcase',
@@ -179,16 +200,28 @@ const AdminServices = () => {
     }
   };
 
+  const filteredServices = services.filter((srv) => {
+    const matchesSearch = !searchQuery || 
+      srv.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (srv.short_description && srv.short_description.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (srv.category && srv.category.toLowerCase().includes(searchQuery.toLowerCase()));
+    const matchesCategory = categoryFilter === 'All' || srv.category === categoryFilter;
+    return matchesSearch && matchesCategory;
+  });
+
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="font-heading font-extrabold text-2xl text-navy-900">
-            Service Management
+          <span className="text-xs font-bold uppercase tracking-wider text-purple-600 bg-purple-50 px-3 py-1 rounded-full border border-purple-200">
+            Enterprise Catalog
+          </span>
+          <h2 className="font-heading font-extrabold text-2xl text-charcoal-950 mt-2">
+            Service Management (400 Services)
           </h2>
-          <p className="text-xs text-slate-500">
-            Configure multi-service offerings, descriptions, bullet features, and public display visibility.
+          <p className="text-xs text-charcoal-500">
+            Configure multi-service offerings, descriptions, bullet features, and public display visibility across all 20 categories.
           </p>
         </div>
 
@@ -199,6 +232,37 @@ const AdminServices = () => {
           <Plus className="w-4 h-4" />
           <span>Add New Service</span>
         </button>
+      </div>
+
+      {/* Filter and Search Bar */}
+      <div className="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+        <div className="relative flex-1">
+          <Search className="w-4 h-4 text-charcoal-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search among 400 services by title, description or category..."
+            className="w-full pl-10 pr-4 py-2.5 bg-[#F8F9FA] rounded-xl text-xs border border-gray-200 focus:outline-none focus:border-purple-500 text-charcoal-900 placeholder-charcoal-400 font-medium"
+          />
+        </div>
+
+        <div className="flex items-center space-x-3">
+          <select
+            value={categoryFilter}
+            onChange={(e) => setCategoryFilter(e.target.value)}
+            className="px-3 py-2.5 bg-[#F8F9FA] border border-gray-200 rounded-xl text-xs font-bold text-charcoal-800 focus:outline-none focus:border-purple-500 cursor-pointer"
+          >
+            <option value="All">All 20 Categories ({services.length} Services)</option>
+            {RAW_CATEGORIES.map(cat => (
+              <option key={cat.id} value={cat.name}>{cat.name}</option>
+            ))}
+          </select>
+
+          <span className="text-xs font-bold text-purple-700 bg-purple-50 px-3 py-2 rounded-xl border border-purple-200 whitespace-nowrap">
+            Showing {filteredServices.length} of {services.length}
+          </span>
+        </div>
       </div>
 
       {/* Notification Toast */}
@@ -215,7 +279,7 @@ const AdminServices = () => {
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
         {loading ? (
           <div className="p-12 text-center">
-            <div className="w-8 h-8 border-4 border-brand-royal border-t-transparent rounded-full animate-spin mx-auto"></div>
+            <div className="w-8 h-8 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
           </div>
         ) : (
           <div className="overflow-x-auto">
@@ -231,14 +295,14 @@ const AdminServices = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {services.map((srv) => (
+                {filteredServices.slice(0, 100).map((srv) => (
                   <tr key={srv.id} className="hover:bg-slate-50/70 transition-colors">
                     <td className="py-4 px-6 font-bold text-slate-400">
                       #{srv.display_order}
                     </td>
                     <td className="py-4 px-6">
                       <div className="font-bold text-navy-900 text-sm">{srv.title}</div>
-                      <div className="text-[11px] text-slate-500">{srv.category} • /{srv.slug}</div>
+                      <div className="text-[11px] text-purple-700 font-semibold">{srv.category} • /{srv.slug}</div>
                     </td>
                     <td className="py-4 px-6 text-slate-600 font-mono">
                       {srv.icon}
@@ -263,7 +327,7 @@ const AdminServices = () => {
                     <td className="py-4 px-6 text-right space-x-2">
                       <button
                         onClick={() => handleOpenEdit(srv)}
-                        className="p-1.5 rounded-lg text-slate-600 hover:text-brand-royal hover:bg-slate-100 transition-colors"
+                        className="p-1.5 rounded-lg text-slate-600 hover:text-purple-600 hover:bg-slate-100 transition-colors"
                         title="Edit service"
                       >
                         <Edit className="w-4 h-4" />
@@ -328,14 +392,16 @@ const AdminServices = () => {
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
                     Category Tag <span className="text-red-500">*</span>
                   </label>
-                  <input
-                    type="text"
+                  <select
                     value={formData.category}
                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    placeholder="e.g. Compliance & Advisory"
                     required
-                    className="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-xs focus:ring-2 focus:ring-brand-royal outline-none"
-                  />
+                    className="w-full px-3.5 py-2 rounded-lg border border-slate-300 text-xs focus:ring-2 focus:ring-purple-600 outline-none bg-white font-medium"
+                  >
+                    {RAW_CATEGORIES.map((cat) => (
+                      <option key={cat.id} value={cat.name}>{cat.name}</option>
+                    ))}
+                  </select>
                 </div>
               </div>
 

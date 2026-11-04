@@ -10,6 +10,8 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
 import ServiceDetail from './pages/ServiceDetail';
+import CategoriesPage from './pages/CategoriesPage';
+import PartnerRegister from './pages/PartnerRegister';
 import Portfolio from './pages/Portfolio';
 import Testimonials from './pages/Testimonials';
 import Contact from './pages/Contact';
@@ -23,6 +25,7 @@ import AdminLayout from './components/admin/AdminLayout';
 import AdminLogin from './pages/admin/AdminLogin';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminServices from './pages/admin/AdminServices';
+import AdminProviders from './pages/admin/AdminProviders';
 import AdminEnquiries from './pages/admin/AdminEnquiries';
 import AdminPortfolio from './pages/admin/AdminPortfolio';
 import AdminTestimonials from './pages/admin/AdminTestimonials';
@@ -61,6 +64,8 @@ function App() {
           <Route path="/" element={<Home onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/about" element={<About onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/services" element={<Services onOpenEnquiry={handleOpenEnquiry} />} />
+          <Route path="/categories" element={<CategoriesPage onOpenEnquiry={handleOpenEnquiry} />} />
+          <Route path="/partner-register" element={<PartnerRegister />} />
           <Route path="/services/:slug" element={<ServiceDetail onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/portfolio" element={<Portfolio onOpenEnquiry={handleOpenEnquiry} />} />
           <Route path="/testimonials" element={<Testimonials onOpenEnquiry={handleOpenEnquiry} />} />
@@ -78,6 +83,7 @@ function App() {
           <Route element={<AdminLayout />}>
             <Route index element={<AdminDashboard />} />
             <Route path="services" element={<AdminServices />} />
+            <Route path="providers" element={<AdminProviders />} />
             <Route path="enquiries" element={<AdminEnquiries />} />
             <Route path="portfolio" element={<AdminPortfolio />} />
             <Route path="testimonials" element={<AdminTestimonials />} />

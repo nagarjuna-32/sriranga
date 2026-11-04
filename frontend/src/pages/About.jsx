@@ -9,10 +9,14 @@ import {
   ArrowRight,
   Briefcase,
   FileCheck,
-  Sparkles
+  Sparkles,
+  MapPin,
+  Layers,
+  CheckCircle
 } from 'lucide-react';
 import { useSettings } from '../context/SettingsContext';
 import StatsSection from '../components/home/StatsSection';
+import TargetCustomersSection from '../components/home/TargetCustomersSection';
 import CTASection from '../components/home/CTASection';
 
 const coreValues = [
@@ -61,10 +65,10 @@ const About = ({ onOpenEnquiry }) => {
             About Our Enterprise
           </span>
           <h1 className="font-heading font-extrabold text-3xl sm:text-5xl mt-4 mb-4 tracking-tight text-charcoal-950">
-            Building Trust Through Seamless Solutions
+            ONE-STOP SOLUTION FOR EVERY NEED
           </h1>
           <p className="text-charcoal-600 text-base sm:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
-            {settings.tagline}
+            EVERY SERVICE. ONE CONNECTION. Connecting You to Opportunities.
           </p>
         </div>
       </section>
@@ -76,22 +80,27 @@ const About = ({ onOpenEnquiry }) => {
             
             <div className="lg:col-span-6 space-y-6">
               <span className="text-xs font-bold uppercase tracking-wider text-purple-700 bg-purple-50 px-3 py-1 rounded-full border border-purple-200">
-                Our Genesis & Purpose
+                Our Genesis & Scale
               </span>
               <h2 className="font-heading font-extrabold text-2xl sm:text-4xl text-charcoal-950 leading-tight">
-                Empowering Businesses by Eliminating Operational Complexity
+                Empowering Karnataka by Eliminating Operational Complexity
               </h2>
               <p className="text-charcoal-600 text-sm sm:text-base leading-relaxed">
-                Founded with a vision to serve as a reliable one-stop corporate pillar, <strong>{settings.company_name}</strong> was born from a simple realization: entrepreneurs and growing enterprises spend too much valuable energy navigating fragmented vendors, confusing bureaucratic portals, and disjointed digital services.
+                Founded with a bold vision to serve as Karnataka's definitive multi-service bridge, <strong>{settings.company_name}</strong> was born from a fundamental realization: individuals, entrepreneurs, builders, and large enterprises spend too much valuable energy navigating fragmented vendors, confusing government procedures, and unreliable service providers.
               </p>
               <p className="text-charcoal-600 text-sm sm:text-base leading-relaxed">
-                By bringing government paperwork guidance, business registration, modern IT engineering, commercial real estate coordination, digital marketing, and event execution under one single corporate umbrella, we provide our clients with peace of mind, rapid turnaround, and unmatched accountability.
+                We have curated <strong>20 comprehensive service categories</strong> encompassing <strong>400 dedicated services</strong>—from construction, architectural planning, and interior design to business compliance, heavy machinery rentals, legal support, IT development, and event management—operating across all 31 districts of Karnataka.
               </p>
 
-              <div className="p-4 rounded-xl bg-[#F8F9FA] border border-gray-200">
-                <p className="text-xs text-charcoal-700 italic">
-                  "Our core promise is simple: We handle the complexity of administration, technology, and execution so that you can focus 100% on expanding your vision."
-                </p>
+              <div className="grid grid-cols-2 gap-4 pt-2">
+                <div className="p-4 rounded-xl bg-[#F8F9FA] border border-gray-200">
+                  <div className="text-2xl font-black text-purple-600">20 Categories</div>
+                  <div className="text-xs text-charcoal-600 mt-1">Full spectrum from civil work to IT & healthcare</div>
+                </div>
+                <div className="p-4 rounded-xl bg-[#F8F9FA] border border-gray-200">
+                  <div className="text-2xl font-black text-coral-600">400 Services</div>
+                  <div className="text-xs text-charcoal-600 mt-1">Specialized solutions tailored for every client</div>
+                </div>
               </div>
             </div>
 
@@ -116,7 +125,7 @@ const About = ({ onOpenEnquiry }) => {
                         {settings.company_name}
                       </div>
                       <div className="text-xs text-purple-100">
-                        Bengaluru, Karnataka • Multi-Service Enterprise
+                        ONE-STOP SOLUTION FOR EVERY NEED • All 31 Karnataka Districts
                       </div>
                     </div>
                   </div>
@@ -133,37 +142,40 @@ const About = ({ onOpenEnquiry }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             
-            {/* Mission Card */}
-            <div className="bg-white rounded-2xl p-8 sm:p-10 border border-gray-200 shadow-sm relative overflow-hidden group hover:shadow-premium-hover transition-all">
-              <div className="w-14 h-14 rounded-2xl bg-purple-50 text-purple-600 border border-purple-200 flex items-center justify-center mb-6 shadow-sm">
-                <Target className="w-7 h-7" />
-              </div>
-              <span className="text-xs font-bold uppercase tracking-wider text-purple-600">Our Mission</span>
-              <h3 className="font-heading font-bold text-2xl text-charcoal-900 mt-1 mb-4">
-                To Make Business Simpler & Ideas Happen
-              </h3>
-              <p className="text-charcoal-600 text-sm sm:text-base leading-relaxed">
-                To provide high-integrity, integrated corporate and digital services that remove procedural friction, foster business compliance, accelerate digital transformation, and curate memorable corporate experiences—empowering clients to achieve their highest commercial potential.
-              </p>
-            </div>
-
-            {/* Vision Card */}
+            {/* Vision Card - EXACT USER REQUIREMENT */}
             <div className="bg-white rounded-2xl p-8 sm:p-10 border border-gray-200 shadow-sm relative overflow-hidden group hover:shadow-premium-hover transition-all">
               <div className="w-14 h-14 rounded-2xl bg-coral-50 text-coral-600 border border-coral-200 flex items-center justify-center mb-6 shadow-sm">
                 <Compass className="w-7 h-7" />
               </div>
               <span className="text-xs font-bold uppercase tracking-wider text-coral-600">Our Vision</span>
               <h3 className="font-heading font-bold text-2xl text-charcoal-900 mt-1 mb-4">
-                The Most Trusted Enterprise Partner
+                Single Platform for Every Service
+              </h3>
+              <p className="text-charcoal-700 text-sm sm:text-base leading-relaxed font-medium">
+                "To provide a single platform where individuals, business owners, companies, contractors and industries can access almost every type of service under one roof across Karnataka and eventually throughout India."
+              </p>
+            </div>
+
+            {/* Mission Card */}
+            <div className="bg-white rounded-2xl p-8 sm:p-10 border border-gray-200 shadow-sm relative overflow-hidden group hover:shadow-premium-hover transition-all">
+              <div className="w-14 h-14 rounded-2xl bg-purple-50 text-purple-600 border border-purple-200 flex items-center justify-center mb-6 shadow-sm">
+                <Target className="w-7 h-7" />
+              </div>
+              <span className="text-xs font-bold uppercase tracking-wider text-purple-600">Our Mission & Model</span>
+              <h3 className="font-heading font-bold text-2xl text-charcoal-900 mt-1 mb-4">
+                Connecting You to Opportunities
               </h3>
               <p className="text-charcoal-600 text-sm sm:text-base leading-relaxed">
-                To be recognized across the region as the benchmark multi-service enterprise, celebrated for ethical consulting, transparent processes, state-of-the-art technological execution, and enduring client partnerships that drive long-term value.
+                To connect customers with verified service providers, contractors, professionals, suppliers and agencies across Karnataka. We coordinate requirements, quotations, service delivery and customer support—ensuring transparency, fair pricing, and total accountability.
               </p>
             </div>
 
           </div>
         </div>
       </section>
+
+      {/* Target Customers Section */}
+      <TargetCustomersSection onOpenEnquiry={onOpenEnquiry} />
 
       {/* Core Values */}
       <section className="py-20 bg-white border-b border-gray-200">
@@ -177,7 +189,7 @@ const About = ({ onOpenEnquiry }) => {
               Our Core Cultural Values
             </h2>
             <p className="text-charcoal-600 text-sm sm:text-base leading-relaxed">
-              Every project we undertake is governed by the principles that define Ranga Sri Enterprises.
+              Every customer requirement and partner collaboration is governed by the principles that define Ranga Sri Enterprises.
             </p>
           </div>
 

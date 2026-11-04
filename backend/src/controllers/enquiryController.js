@@ -3,7 +3,7 @@ const initModels = require('../models');
 
 const createEnquiry = async (req, res) => {
   try {
-    const { name, phone, email, service_name, message } = req.body;
+    const { name, phone, email, service_name, category, district, enquiry_type, message } = req.body;
 
     if (!name || !phone || !message) {
       return res.status(400).json({
@@ -27,6 +27,9 @@ const createEnquiry = async (req, res) => {
       phone: cleanPhone,
       email: email ? email.trim() : null,
       service_name: service_name || 'General Inquiry',
+      category: category || 'General',
+      district: district || 'Bengaluru Urban',
+      enquiry_type: enquiry_type || 'Enquiry',
       message: message.trim(),
       status: 'pending',
     });
@@ -38,6 +41,9 @@ const createEnquiry = async (req, res) => {
         id: enquiry.id,
         name: enquiry.name,
         service_name: enquiry.service_name,
+        category: enquiry.category,
+        district: enquiry.district,
+        enquiry_type: enquiry.enquiry_type,
         created_at: enquiry.created_at,
       },
     });

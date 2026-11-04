@@ -1,14 +1,30 @@
 import api from './api';
 
 export const publicService = {
-  // Services
-  getServices: async () => {
-    const res = await api.get('/services');
+  // Services & Categories
+  getServices: async (params = {}) => {
+    const res = await api.get('/services', { params });
+    return res.data;
+  },
+
+  getCategories: async () => {
+    const res = await api.get('/services/meta/categories');
+    return res.data;
+  },
+
+  getDistricts: async () => {
+    const res = await api.get('/services/meta/districts');
     return res.data;
   },
 
   getServiceBySlug: async (slug) => {
     const res = await api.get(`/services/${slug}`);
+    return res.data;
+  },
+
+  // Partner / Provider Registration
+  registerProvider: async (payload) => {
+    const res = await api.post('/providers/register', payload);
     return res.data;
   },
 
@@ -35,7 +51,7 @@ export const publicService = {
     return res.data;
   },
 
-  // Enquiries
+  // Enquiries & Quotations
   submitEnquiry: async (payload) => {
     const res = await api.post('/enquiries', payload);
     return res.data;

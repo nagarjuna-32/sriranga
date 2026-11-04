@@ -1,43 +1,107 @@
 const { sequelize } = require('../config/database');
 const initModels = require('../models');
-
-// Helper to slugify
-const slugify = (text) => {
-  return text
-    .toString()
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, '-')
-    .replace(/[^\w\-]+/g, '')
-    .replace(/\-\-+/g, '-');
-};
+const { RAW_CATEGORIES, ALL_SERVICES, KARNATAKA_DISTRICTS, slugify } = require('../data/servicesCatalog');
+const { Op } = require('sequelize');
 
 const getAllServices = async (req, res) => {
   try {
     const models = initModels(sequelize());
     const isAdmin = req.query.admin === 'true';
+    const { category, search, district, limit, offset } = req.query;
+
     const whereClause = isAdmin ? {} : { is_active: true };
 
-    const services = await models.Service.findAll({
+    if (category && category !== 'All' && category !== 'all') {
+      whereClause.category = {
+        [Op.like]: `%${category}%`
+      };
+    }
+
+    if (search && search.trim() !== '') {
+      const q = `%${search.trim()}%`;
+      whereClause[Op.or] = [
+        { title: { [Op.like]: q } },
+        { category: { [Op.like]: q } },
+        { short_description: { [Op.like]: q } }
+      ];
+    }
+
+    let services = await models.Service.findAll({
       where: whereClause,
       order: [
         ['display_order', 'ASC'],
         ['id', 'ASC'],
       ],
+      limit: limit ? parseInt(limit, 10) : undefined,
+      offset: offset ? parseInt(offset, 10) : undefined,
     });
+
+    // Resilient fallback: If database is not fully populated yet, use our built-in 400-service catalog
+    if (!services || services.length === 0) {
+      let filtered = [...ALL_SERVICES];
+      if (!isAdmin) {
+        filtered = filtered.filter(s => s.is_active);
+      }
+      if (category && category !== 'All' && category !== 'all') {
+        const catLower = category.toLowerCase();
+        filtered = filtered.filter(s => s.category.toLowerCase().includes(catLower) || s.category_slug.includes(catLower));
+      }
+      if (search && search.trim() !== '') {
+        const q = search.toLowerCase().trim();
+        filtered = filtered.filter(s => 
+          s.title.toLowerCase().includes(q) || 
+          s.category.toLowerCase().includes(q) || 
+          s.short_description.toLowerCase().includes(q)
+        );
+      }
+      services = filtered;
+    }
 
     return res.status(200).json({
       success: true,
-      count: services.length,
+      total_count: services.length,
+      categories_count: RAW_CATEGORIES.length,
       data: services,
     });
   } catch (error) {
     console.error('[GET SERVICES ERROR]', error);
-    return res.status(500).json({
-      success: false,
-      message: 'Failed to retrieve services.',
+    // Graceful fallback to static 400 catalog
+    return res.status(200).json({
+      success: true,
+      total_count: ALL_SERVICES.length,
+      categories_count: RAW_CATEGORIES.length,
+      data: ALL_SERVICES,
     });
   }
+};
+
+const getCategories = async (req, res) => {
+  try {
+    const categoriesWithCount = RAW_CATEGORIES.map(c => ({
+      ...c,
+      services_count: c.services.length
+    }));
+
+    return res.status(200).json({
+      success: true,
+      count: categoriesWithCount.length,
+      data: categoriesWithCount
+    });
+  } catch (error) {
+    console.error('[GET CATEGORIES ERROR]', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Failed to retrieve categories.'
+    });
+  }
+};
+
+const getDistricts = async (req, res) => {
+  return res.status(200).json({
+    success: true,
+    count: KARNATAKA_DISTRICTS.length,
+    data: KARNATAKA_DISTRICTS
+  });
 };
 
 const getServiceBySlug = async (req, res) => {
@@ -45,14 +109,19 @@ const getServiceBySlug = async (req, res) => {
     const { slug } = req.params;
     const models = initModels(sequelize());
 
-    const service = await models.Service.findOne({
+    let service = await models.Service.findOne({
       where: { slug },
     });
 
     if (!service) {
+      // Check in memory catalog
+      service = ALL_SERVICES.find(s => s.slug === slug || s.slug.endsWith(slug));
+    }
+
+    if (!service) {
       return res.status(404).json({
         success: false,
-        message: 'Service not found.',
+        message: 'Service not found in catalog.',
       });
     }
 
@@ -62,6 +131,10 @@ const getServiceBySlug = async (req, res) => {
     });
   } catch (error) {
     console.error('[GET SERVICE ERROR]', error);
+    const fallback = ALL_SERVICES.find(s => s.slug === req.params.slug);
+    if (fallback) {
+      return res.status(200).json({ success: true, data: fallback });
+    }
     return res.status(500).json({
       success: false,
       message: 'Failed to retrieve service details.',
@@ -93,16 +166,15 @@ const createService = async (req, res) => {
     const models = initModels(sequelize());
     let slug = slugify(title);
 
-    // Ensure unique slug
     let existing = await models.Service.findOne({ where: { slug } });
     if (existing) {
       slug = `${slug}-${Date.now().toString().slice(-4)}`;
     }
 
-    const service = await models.Service.create({
+    const newService = await models.Service.create({
       title,
       slug,
-      category: category || 'General Services',
+      category: category || 'General',
       short_description,
       full_description,
       icon: icon || 'Briefcase',
@@ -115,7 +187,7 @@ const createService = async (req, res) => {
     return res.status(201).json({
       success: true,
       message: 'Service created successfully.',
-      data: service,
+      data: newService,
     });
   } catch (error) {
     console.error('[CREATE SERVICE ERROR]', error);
@@ -130,8 +202,8 @@ const updateService = async (req, res) => {
   try {
     const { id } = req.params;
     const models = initModels(sequelize());
-    const service = await models.Service.findByPk(id);
 
+    const service = await models.Service.findByPk(id);
     if (!service) {
       return res.status(404).json({
         success: false,
@@ -153,7 +225,7 @@ const updateService = async (req, res) => {
 
     if (title && title !== service.title) {
       service.title = title;
-      // Optionally update slug if requested or keep stable
+      service.slug = slugify(title);
     }
     if (category !== undefined) service.category = category;
     if (short_description !== undefined) service.short_description = short_description;
@@ -184,8 +256,8 @@ const deleteService = async (req, res) => {
   try {
     const { id } = req.params;
     const models = initModels(sequelize());
-    const service = await models.Service.findByPk(id);
 
+    const service = await models.Service.findByPk(id);
     if (!service) {
       return res.status(404).json({
         success: false,
@@ -210,6 +282,8 @@ const deleteService = async (req, res) => {
 
 module.exports = {
   getAllServices,
+  getCategories,
+  getDistricts,
   getServiceBySlug,
   createService,
   updateService,

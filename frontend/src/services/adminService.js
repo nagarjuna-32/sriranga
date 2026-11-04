@@ -60,6 +60,22 @@ export const adminService = {
     return res.data;
   },
 
+  // Providers & Partner Management
+  getAllProviders: async (params) => {
+    const res = await api.get('/providers', { params });
+    return res.data;
+  },
+
+  updateProviderStatus: async (id, status, admin_notes) => {
+    const res = await api.put(`/providers/${id}/status`, { status, admin_notes });
+    return res.data;
+  },
+
+  deleteProvider: async (id) => {
+    const res = await api.delete(`/providers/${id}`);
+    return res.data;
+  },
+
   // Portfolio Management
   getAllPortfolio: async () => {
     const res = await api.get('/portfolio');

@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const {
   getAllServices,
+  getCategories,
+  getDistricts,
   getServiceBySlug,
   createService,
   updateService,
@@ -11,6 +13,8 @@ const { authenticateAdmin } = require('../middleware/auth');
 
 // Public endpoints
 router.get('/', getAllServices);
+router.get('/meta/categories', getCategories);
+router.get('/meta/districts', getDistricts);
 router.get('/:slug', getServiceBySlug);
 
 // Admin endpoints
